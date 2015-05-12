@@ -353,8 +353,10 @@ def set_mode(path, mode):
         salt '*' file.set_mode /etc/passwd 0644
     '''
     path = os.path.expanduser(path)
-
-    mode = str(mode).lstrip('0')
+    mode = str(mode)
+    
+    if len(mode) == 4:
+        mode = mode.lstrip('0')
     if not mode:
         mode = '0'
     if not os.path.exists(path):
